@@ -1,0 +1,12 @@
+{
+  "source": "https://huggingface.co/datasets/TrustAIRLab/Moltbook",
+  "note": "Per-post comment text is not included in this release; only comment_count.",
+  "files": {
+    "moltbook_posts_flat.parquet": {
+      "rows": 44376
+    },
+    "moltbook_submolts.parquet": {
+      "rows": 12209
+    }
+  }
+}
