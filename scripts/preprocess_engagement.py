@@ -1,9 +1,6 @@
-#!/usr/bin/env python3
-"""Preprocess Moltbook posts: clean data, compute text features,
-engagement scores, and engagement quartile classes.
 
-Reads:  data/moltbook_posts_flat.parquet
-Writes: data/moltbook_posts_preprocessed.parquet
+"""
+Preprocess Moltbook posts for engagement analysis.
 """
 
 from __future__ import annotations
@@ -27,8 +24,6 @@ def load_raw(path: Path) -> pd.DataFrame:
     return df
 
 
-# ── Step 1: Clean ──────────────────────────────────────────────────────────
-
 def clean(df: pd.DataFrame) -> pd.DataFrame:
     n_before = len(df)
 
@@ -51,8 +46,6 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-# ── Step 2: Text features ─────────────────────────────────────────────────
-
 def add_text_features(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
 
@@ -65,7 +58,6 @@ def add_text_features(df: pd.DataFrame) -> pd.DataFrame:
     df["content_word_count"] = df["content"].str.split().str.len().fillna(0).astype(int)
     df["combined_word_count"] = df["title_word_count"] + df["content_word_count"]
 
-    # sentence count: split on .!? followed by whitespace or end-of-string
     df["sentence_count"] = (
         df["combined_text"]
         .str.split(r"[.!?]+\s*")
@@ -133,9 +125,6 @@ def add_engagement_class(df: pd.DataFrame) -> pd.DataFrame:
         print(f"  {cls:>14s}: {n:>6,}  ({n / total * 100:5.1f}%)")
 
     return df
-
-
-# ── Main ───────────────────────────────────────────────────────────────────
 
 def main() -> None:
     parser = argparse.ArgumentParser(
