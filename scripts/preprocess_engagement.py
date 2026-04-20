@@ -4,10 +4,8 @@ Preprocess Moltbook posts for engagement analysis.
 """
 
 from __future__ import annotations
-
 import argparse
 from pathlib import Path
-
 import numpy as np
 import pandas as pd
 
@@ -36,7 +34,6 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
 
     df["created_at"] = pd.to_datetime(df["created_at"], utc=True)
 
-    # drop rows where both title and content are empty
     empty_mask = (df["title"].str.strip() == "") & (df["content"].str.strip() == "")
     n_empty = empty_mask.sum()
     df = df[~empty_mask].reset_index(drop=True)
@@ -67,14 +64,12 @@ def add_text_features(df: pd.DataFrame) -> pd.DataFrame:
     )
 
     df["hour_of_day"] = df["created_at"].dt.hour
-    df["day_of_week"] = df["created_at"].dt.dayofweek  # 0=Mon … 6=Sun
+    df["day_of_week"] = df["created_at"].dt.dayofweek
 
     print(f"Text features: added char/word counts, sentence count, "
           f"hour_of_day, day_of_week")
     return df
 
-
-# ── Step 5: Engagement score ──────────────────────────────────────────────
 
 def add_engagement_score(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
@@ -89,8 +84,6 @@ def add_engagement_score(df: pd.DataFrame) -> pd.DataFrame:
           f"max={df['engagement_score'].max():.3f}")
     return df
 
-
-# ── Step 6: Engagement classes ─────────────────────────────────────────────
 
 def add_engagement_class(df: pd.DataFrame) -> pd.DataFrame:
     """Assign engagement quartile classes.
