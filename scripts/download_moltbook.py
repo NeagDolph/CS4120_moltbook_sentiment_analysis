@@ -1,21 +1,14 @@
-#!/usr/bin/env python3
-"""Download TrustAIRLab/Moltbook from Hugging Face into data/.
-
-The Hub release has two configs:
-  - posts: ~44k annotated posts (text in nested ``post``; ``comment_count`` only, no comment bodies)
-  - submolts: ~12k community metadata rows
-
-See https://huggingface.co/datasets/TrustAIRLab/Moltbook
+"""
+Connects to the API and grabs post data
 """
 
 from __future__ import annotations
-
 import argparse
 import json
 from pathlib import Path
-
 import pandas as pd
 from datasets import load_dataset
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DATA_DIR = REPO_ROOT / "data"
