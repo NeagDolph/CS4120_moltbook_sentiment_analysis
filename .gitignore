@@ -1,5 +1,10 @@
-.venv/
 venv/
+.venv*/
 __pycache__/
 *.py[cod]
 .DS_Store
+.ipynb_checkpoints/
+
+# Generated data (run scripts/download_moltbook.py + scripts/preprocess_engagement.py
+# + notebooks/feature_engineering.ipynb to regenerate)
+data/
