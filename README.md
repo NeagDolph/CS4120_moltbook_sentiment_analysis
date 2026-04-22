@@ -33,7 +33,7 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/linear_reg.ipynb
 jupyter nbconvert --to notebook --execute --inplace notebooks/FFNN.ipynb
 ```
 
-Or open them in `jupyter lab`. The feature engineering notebook takes a couple of minutes (POS tagging is the slow part) and the FFNN sweep takes roughly half an hour on CPU.
+Or open them in `jupyter lab`. Total runtime is around 5 minutes on CPU; feature engineering (POS tagging) and the FFNN hyperparameter sweep are the longest steps at roughly 2-3 minutes each.
 
 ## Notebooks
 
